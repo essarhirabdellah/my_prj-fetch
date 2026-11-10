@@ -8,10 +8,20 @@
     <title>webapp</title>
 </head>
 <body>
-    <nav>
-
+    <nav navbar>
+      <ul class="nav nav-pills">
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="#" home>home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#" add>add</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" aria-disabled="true" fealtring>fealtring</a>
+  </li>
+</ul>
     </nav>
-    <section class="grid grid-cols-3 gap-1 w-100">
+    <section class="grid grid-cols-3 gap-1 w-100" mainsection>
         <!-- to do part -->
         <div class="d-flex flex-column border border-emphasized p-5" todo>
          <h2> to do part </h2>
@@ -25,6 +35,38 @@
            <h2>completed</h2>
         </div>
     </section>
+    <form action="" class="d-none" myformadd>
+        
+        <div>
+  <label for="sizesInputSmall" class="form-label">name:</label>
+  <input class="form-control form-control-sm" type="text" id="sizesInputSmall" placeholder="Inès Moreau" aria-label="Small input example" name-user>
+</div>
+<div>
+  <label for="sizesInputSmall" class="form-label">title:</label>
+  <input class="form-control form-control-sm" type="text" id="sizesInputSmall" placeholder="Gérer l'état de chargement" aria-label="Small input example" title-user>
+</div>
+<div>
+  <label for="sizesTextareaSmall" class="form-label">discrption:</label>
+  <textarea class="form-control form-control-sm" id="sizesTextareaSmall" placeholder="Afficher un indicateur pendant les requêtes et un message en cas d’erreur." aria-label="Small textarea example" discrption></textarea>
+</div>
+<div>
+  <label for="sizesSelectSmall" class="form-label">status:</label>
+  <select class="form-control form-control-sm" id="sizesSelectSmall" statusoption>
+    <option>Open this select menu</option>
+    <option value="1">to do</option>
+    <option value="2">on going</option>
+    <option value="3">finshed</option>
+  </select>
+</div>
+<div class="form-field">
+  <label for="fieldTextarea" class="form-label">add tags:</label>
+  <textarea class="form-control" id="fieldTextarea" rows="3"></textarea>
+  <div class="form-text">
+    pleas put keyword '#' between your tags.
+  </div>
+</div>
+<button type="button" class="btn-solid theme-primary">submit</button>
+    </form>
 </body>
 <script type="module"  src="ui.js"></script>
 <script type="module" src="api.js"></script>
