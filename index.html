@@ -8,7 +8,9 @@
     <title>webapp</title>
 </head>
 <body>
-    <nav navbar>
+  <main class="maymain">
+    <nav navbar class="d-flex justify-content-between">
+      <div>
       <ul class="nav nav-pills">
   <li class="nav-item">
     <a class="nav-link active" aria-current="page" href="#" home>home</a>
@@ -16,25 +18,70 @@
   <li class="nav-item">
     <a class="nav-link" href="#" add>add</a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" aria-disabled="true" fealtring>fealtring</a>
-  </li>
-</ul>
+  </ul>
+  </div>
+  <div>
+   <form class="d-flex" role="search" mysaerch>
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" mysaerchinput />
+      <button class="btn-outline theme-success" type="submit">Search</button>
+    </form>
+  </div>
+
     </nav>
     <section class="grid grid-cols-3 gap-1 w-100" mainsection>
+        <div style="display: grid; grid-column: 1/4;" flterhome>
+          <div>
+  <h3>filter</h3>
+  <label for="sizesSelectSmall" class="form-label">status:</label>
+  <select class="form-control form-control-sm" id="sizesSelectSmall" statusfilter>
+    <option>Open this select menu</option>
+    <option>todo</option>
+    <option>in-progress</option>
+    <option>done</option>
+  </select>
+</div>
+<div>
+  <label for="sizesSelectSmall" class="form-label">priority:</label>
+  <select class="form-control form-control-sm" id="sizesSelectSmall" priorityfilter>
+    <option>Open this select menu</option>
+    <option>low</option>
+    <option>medium</option>
+    <option>high</option>
+  </select>
+</div>
+        </div>
         <!-- to do part -->
-        <div class="d-flex flex-column border border-emphasized p-5" todo>
+        <div class="d-flex flex-column border border-emphasized p-5" >
+          <div class="d-flex justify-content-between">
          <h2> to do part </h2>
+         <span class="count">0</span>
+         </div>
+         <div todo>
+
+         </div>
         </div>
         <!-- ongoing part -->
-        <div class="d-flex flex-column border border-emphasized p-5" ongoing>
+        <div class="d-flex flex-column border border-emphasized p-5" >
+          <div class="d-flex justify-content-between">
           <h2>  ongoing part</h2>
+          <span class="chip count">0</span>
+          </div>
+          <div ongoing>
+
+          </div>
         </div>
         <!-- fensh part -->
-        <div class="d-flex flex-column border border-emphasized p-5" done>
+        <div class="d-flex flex-column border border-emphasized p-5" >
+          <div class="d-flex justify-content-between">
            <h2>completed</h2>
+           <span class="chip count">0</span>
+           </div>
+           <div done>
+
+           </div>
         </div>
     </section>
+
     <form action="" class="d-none" myformadd>
         
         <div>
@@ -53,20 +100,38 @@
   <label for="sizesSelectSmall" class="form-label">status:</label>
   <select class="form-control form-control-sm" id="sizesSelectSmall" statusoption>
     <option>Open this select menu</option>
-    <option value="1">to do</option>
-    <option value="2">on going</option>
-    <option value="3">finshed</option>
+    <option>todo</option>
+    <option>in-progress</option>
+    <option>done</option>
+  </select>
+</div>
+<div>
+  <label for="sizesSelectSmall" class="form-label">priority:</label>
+  <select class="form-control form-control-sm" id="sizesSelectSmall" priorityoption>
+    <option>Open this select menu</option>
+    <option>low</option>
+    <option>medium</option>
+    <option>high</option>
   </select>
 </div>
 <div class="form-field">
   <label for="fieldTextarea" class="form-label">add tags:</label>
-  <textarea class="form-control" id="fieldTextarea" rows="3"></textarea>
+  <textarea class="form-control" id="fieldTextarea" rows="3" tags></textarea>
   <div class="form-text">
     pleas put keyword '#' between your tags.
   </div>
 </div>
-<button type="button" class="btn-solid theme-primary">submit</button>
+<button type="button" class="btn-solid theme-primary" submit>submit</button>
     </form>
+</main>
+<main class="error" style="display: none;">
+         <div class="flex flex-column   w-50" error-part>
+         <svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 24 24"><path d="M16.707 2.293A.996.996 0 0 0 16 2H8a.996.996 0 0 0-.707.293l-5 5A.996.996 0 0 0 2 8v8c0 .266.105.52.293.707l5 5A.996.996 0 0 0 8 22h8c.266 0 .52-.105.707-.293l5-5A.996.996 0 0 0 22 16V8a.996.996 0 0 0-.293-.707l-5-5zM13 17h-2v-2h2v2zm0-4h-2V7h2v6z" fill="currentColor"/></svg>
+         <h1>EROOR</h1>
+          <h4>sorry,there is a problem...</h4>
+         <button class="btn-solid theme-danger" ag-ian> try agian </button>
+         </div>
+</main>
 </body>
 <script type="module"  src="ui.js"></script>
 <script type="module" src="api.js"></script>
