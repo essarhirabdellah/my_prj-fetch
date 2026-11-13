@@ -200,7 +200,7 @@ function myfilter() {
     if (nameflt.value != 'Open this select menu') {
         // mylink.search = '?assignee=' + nameflt.value; 
         // console.log(nameflt.value)
-        mylink.searchParams.set('assignee',`${nameflt.value}`)
+        return mylink.searchParams.set('assignee',`${nameflt.value}`)
         
         
         
@@ -235,7 +235,7 @@ function lisnertomyflters(){
        function mysearch() {
         //  mylink.href = "https://flowboard-api-virid.vercel.app/cards"
          let my_search = document.querySelector('[mysaerchinput]')
-        mylink.searchParams.set('search',`${my_search.value}`)
+         return  mylink.searchParams.set('search',`${my_search.value}`)
     }
        mysearch()
        fetching()
