@@ -3,7 +3,7 @@ export let mydata = null
 export let mylink = new URL('https://flowboard-api-virid.vercel.app/cards')
 export function fetching(){
 //  let y = mylink.toString()
-fetch(mylink.toString(), {
+fetch(mylink.href, {
   headers: {
     'X-Workspace': 'public'
   }

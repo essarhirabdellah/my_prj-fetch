@@ -2,6 +2,7 @@ import {mydata,mylink,fetching} from './api.js'
 
 
 export function printingelmnents() {
+    let myklist=[]
     // git my html elment todo crads part error-part
     // const err_or = document.querySelector('[error-part]')
     // const main = document.querySelector('main')
@@ -19,10 +20,14 @@ export function printingelmnents() {
     mydonecardslist.innerHTML = ""
     console.log(mydata)
     let all_chibs = document.querySelectorAll('.count')
+    let optionlist = document.querySelector('[namefilter]')
     let a = 0
     let b = 0
     let c = 0
+
     for(let taskobj of mydata){
+       myklist.push(taskobj.assignee)
+       optionlist.insertAdjacentHTML('beforeend',`<option>${taskobj.assignee}</option>`)
        function tag_s() {
         let x = ``
         for (let tag of taskobj.tags) {
@@ -187,21 +192,18 @@ export function errorPage(stute) {
     )
 }
 function myfilter() {
-    let mystuteflt = document.querySelector('[statusfilter]')
+  
+
+    // mylink.href = "https://flowboard-api-virid.vercel.app/cards"
+    let nameflt = document.querySelector('[namefilter]')
     let proretyflt = document.querySelector('[priorityfilter]')
-    switch (mystuteflt.value) {
-        case 'todo':
-            mylink.searchParams.set('status','todo')
-            break;
-        case 'in-progress':
-            mylink.searchParams.set('status','in-progress')
-            break;
-        case 'done':
-            mylink.searchParams.set('status','done')
-            break;
-        default:
-            mylink.href = "https://flowboard-api-virid.vercel.app/cards"
-            break;
+    if (nameflt.value != 'Open this select menu') {
+        // mylink.search = '?assignee=' + nameflt.value; 
+        // console.log(nameflt.value)
+        mylink.searchParams.set('assignee',`${nameflt.value}`)
+        
+        
+        
     }
     switch (proretyflt.value) {
         case 'low':
@@ -231,8 +233,9 @@ function lisnertomyflters(){
     })
     mysearchform.addEventListener('submit',() => {
        function mysearch() {
+        //  mylink.href = "https://flowboard-api-virid.vercel.app/cards"
          let my_search = document.querySelector('[mysaerchinput]')
-         mylink.searchParams.set('search',`${my_search.value}`)
+        mylink.searchParams.set('search',`${my_search.value}`)
     }
        mysearch()
        fetching()
