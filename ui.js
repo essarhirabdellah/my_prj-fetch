@@ -1,14 +1,9 @@
-import {mydata,mylink,fetching} from './api.js'
+import {myArraybln} from './main.js'
 
-
-export function printingelmnents() {
+export let globalid = 0
+export function printingelmnents(mydata) {
     let myklist=[]
-    // git my html elment todo crads part error-part
-    // const err_or = document.querySelector('[error-part]')
-    // const main = document.querySelector('main')
-    // err_or.classList.add('d-none')
-    // main.classList.remove('d-none')
-     const main = document.querySelector('.maymain')
+    const main = document.querySelector('.maymain')
     main.style.display = "block"
     const eron = document.querySelector('.error')
     eron.style.display = "none"
@@ -18,17 +13,21 @@ export function printingelmnents() {
     mytodocardslist.innerHTML=""
     myongoingcardslist.innerHTML=""
     mydonecardslist.innerHTML = ""
-    console.log(mydata)
     let all_chibs = document.querySelectorAll('.count')
     let optionlist = document.querySelector('[namefilter]')
     let a = 0
     let b = 0
     let c = 0
-
+    all_chibs[0].textContent =  a
+     all_chibs[1].textContent =  b
+      all_chibs[2].textContent =  c
     for(let taskobj of mydata){
-       myklist.push(taskobj.assignee)
-       optionlist.insertAdjacentHTML('beforeend',`<option>${taskobj.assignee}</option>`)
-       function tag_s() {
+       if (!myklist.includes(taskobj.assignee)) {
+          myklist.push(taskobj.assignee)
+          optionlist.insertAdjacentHTML('beforeend',`<option>${taskobj.assignee}</option>`)
+     
+       }
+         function tag_s() {
         let x = ``
         for (let tag of taskobj.tags) {
             x += `<span class="chip"># ${tag}</span>`
@@ -44,6 +43,9 @@ export function printingelmnents() {
     <h4 class="card-title">${taskobj.title}</h4>
     <p class="card-subtitle fg-3">by ${taskobj.assignee}</p>
     <p class="card-text"> ${taskobj.description}</p>
+    <button type="button" class="btn-solid theme-primary" data-bs-toggle="dialog" data-bs-target="#scrollableBodyDialog" data-id=${taskobj.id}>
+  edit
+</button>
     ${tag_s()}
   </div>
 </div>
@@ -57,6 +59,9 @@ export function printingelmnents() {
     <h4 class="card-title">${taskobj.title}</h4>
     <p class="card-subtitle fg-3">by ${taskobj.assignee}</p>
     <p class="card-text"> ${taskobj.description}</p>
+    <button type="button" class="btn-solid theme-primary" data-bs-toggle="dialog" data-bs-target="#scrollableBodyDialog" data-id=${taskobj.id}>
+  edit
+</button>
     ${tag_s()}
   </div>
 </div>
@@ -70,6 +75,9 @@ export function printingelmnents() {
     <h4 class="card-title">${taskobj.title}</h4>
     <p class="card-subtitle fg-3">by ${taskobj.assignee}</p>
     <p class="card-text"> ${taskobj.description}</p>
+    <button type="button" class="btn-solid theme-primary" data-bs-toggle="dialog" data-bs-target="#scrollableBodyDialog" data-id=${taskobj.id}>
+  edit
+</button>
     ${tag_s()}
   </div>
 </div>
@@ -77,7 +85,7 @@ export function printingelmnents() {
        }
     }
 }
-function navbarstyling() {
+export function navbarstyling() {
     let mysection = document.querySelector('[mainsection]')
     var addform = document.querySelector('[myformadd]')
     // let addelment = document.querySelector('[add]')
@@ -101,28 +109,28 @@ function navbarstyling() {
     // navbarelemebt.childNodes.forEach
     navbarelement.addEventListener('click',(e)=>{newnavstyle(e)})
 }
-navbarstyling()
+// navbarstyling()
 
 //SUBMIT BTN
 
-let mynamesubbtn = document.querySelector('[submit]')
-function formvefiction() {
-    //ALL MY FROM INPUT
-    let myform = document.querySelector('[myformadd]')
-    let mynameInput = document.querySelector('[name-user]')
-    let mytitleInput = document.querySelector('[title-user]')
-    let mydisInput = document.querySelector('[discrption]')
-    let mystatusInput = document.querySelector('[statusoption]')
-    let myspriorityoptionInput = document.querySelector('[priorityoption]')
-    let myAlltags = document.querySelector('[tags]')
-    //REGEXP FOR VEFICTION 
-    const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:[ '\-][A-Za-zÀ-ÖØ-öø-ÿ]+)*$/;
-    const titleRegex = /^.{1,50}$/;
-    const allTagsRegex = /^#\w+(?:\s+#\w+)*$/;
-    //array of boolean 
-    let myArraybln = []
+// let mynamesubbtn = document.querySelector('[submit]')
+// function formvefiction() {
+//     //ALL MY FROM INPUT
+    // let myform = document.querySelector('[myformadd]')
+//     let mynameInput = document.querySelector('[name-user]')
+//     let mytitleInput = document.querySelector('[title-user]')
+//     let mydisInput = document.querySelector('[discrption]')
+//     let mystatusInput = document.querySelector('[statusoption]')
+//     let myspriorityoptionInput = document.querySelector('[priorityoption]')
+//     let myAlltags = document.querySelector('[tags]')
+//     //REGEXP FOR VEFICTION 
+//     const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:[ '\-][A-Za-zÀ-ÖØ-öø-ÿ]+)*$/;
+//     const titleRegex = /^.{1,50}$/;
+//     const allTagsRegex = /^#\w+(?:\s+#\w+)*$/;
+//     //array of boolean 
+// export let myArraybln = []
     //FUNCTION FOR VECTION AND STYLE WITH RETRUN
-    function verfiction(regExp,input) {
+export   function verfiction(regExp,input) {
         if (regExp.test(input.value.trim())) {
             input.style.outline = '3px solid green'
             myArraybln.push(true)
@@ -132,7 +140,7 @@ function formvefiction() {
             myArraybln.push(false)
         }
     }
-    function verfictionoptions(input) {
+export  function verfictionoptions(input) {
         if (input.value.trim() != 'Open this select menu') {
             input.style.outline = '3px solid green'
             myArraybln.push(true)
@@ -143,103 +151,46 @@ function formvefiction() {
         }
     }
     // FUNCTION FOR CREAT ONJ OF USER FORPM
-    function creatrequst() {
-        let myobj = {}
-        myobj.assignee = mynameInput.value.trim()
-        myobj.title = mytitleInput.value.trim()
-        myobj.status = mystatusInput.value.trim()
-        myobj.priority = myspriorityoptionInput.value.trim()
-        myobj.description = mydisInput.value.trim()
-        myobj.tags = myAlltags.value.trim().split('#').slice(1,)
-        return myobj 
-    }
-    // UPDATE MY WHOLE LIST OF CARDS
-    function mycreation(allbln){
-           if(!allbln.includes(false) && allbln.length > 0){
-            mydata.push(creatrequst())
-            myform.reset()
-            printingelmnents(mydata)
-           }
-    }
+//  export  function creatrequst() {
+//         let myobj = {}
+//         myobj.assignee = mynameInput.value.trim()
+//         myobj.title = mytitleInput.value.trim()
+//         myobj.status = mystatusInput.value.trim()
+//         myobj.priority = myspriorityoptionInput.value.trim()
+//         myobj.description = mydisInput.value.trim()
+//         myobj.tags = myAlltags.value.trim().split('#').slice(1,)
+//         return myobj 
+//     }
+    // // UPDATE MY WHOLE LIST OF CARDS
+    // export function mycreation(allbln){
+    //        if(!allbln.includes(false) && allbln.length > 0){
+    //         mydata.push(creatrequst())
+    //         myform.reset()
+    //         printingelmnents(mydata)
+    //        }
+    // }
     //ADD LISNER TO MY SUBMIT BUTTON
-    let mysubmitbutton = document.querySelector('[submit]')
-    mysubmitbutton.addEventListener('click', () => {
-      verfiction(nameRegex,mynameInput)
-      verfiction(titleRegex,mytitleInput)
-      verfiction(allTagsRegex,myAlltags)
-      verfictionoptions(mystatusInput)
-      verfictionoptions(myspriorityoptionInput)
-      mycreation(myArraybln)
-      myArraybln = []
-    })
+    // let mysubmitbutton = document.querySelector('[submit]')
+    // mysubmitbutton.addEventListener('click', () => {
+    //   verfiction(nameRegex,mynameInput)
+    //   verfiction(titleRegex,mytitleInput)
+    //   verfiction(allTagsRegex,myAlltags)
+    //   verfictionoptions(mystatusInput)
+    //   verfictionoptions(myspriorityoptionInput)
+    //   mycreation(myArraybln)
+    //   myArraybln = []
+    // })
     
     
 
-}
-formvefiction()
+// }
+// formvefiction()
 //MY ERROR BAGE
-export function errorPage(stute) {
-    console.log(stute)
+export function errorPage(error) {
     const main = document.querySelector('.maymain')
     main.style.display = "none"
     const eron = document.querySelector('.error')
     eron.style.display = "block"
-     
-    let agian = document.querySelector('[ag-ian]')
-    agian.addEventListener("click",()=>{
-        fetching()
-      }
-    )
+     console.log(error)
+    
 }
-function myfilter() {
-  
-
-    // mylink.href = "https://flowboard-api-virid.vercel.app/cards"
-    let nameflt = document.querySelector('[namefilter]')
-    let proretyflt = document.querySelector('[priorityfilter]')
-    if (nameflt.value != 'Open this select menu') {
-        // mylink.search = '?assignee=' + nameflt.value; 
-        // console.log(nameflt.value)
-        return mylink.searchParams.set('assignee',`${nameflt.value}`)
-        
-        
-        
-    }
-    switch (proretyflt.value) {
-        case 'low':
-            mylink.searchParams.set('priority','low')
-            break;
-        case 'medium':
-            mylink.searchParams.set('priority','medium')
-            break;
-        case 'high':
-            mylink.searchParams.set('priority','high')
-            break;
-        default:
-            mylink.href = "https://flowboard-api-virid.vercel.app/cards"
-            
-            break;
-    }
-   
-       
-}
-// set lesnters 
-function lisnertomyflters(){
-    let myfltersection = document.querySelector('[flterhome]')
-    let mysearchform = document.querySelector('[mysaerch]')
-    myfltersection.addEventListener('click',() => {
-        myfilter()
-        fetching()
-    })
-    mysearchform.addEventListener('submit',() => {
-       function mysearch() {
-        //  mylink.href = "https://flowboard-api-virid.vercel.app/cards"
-         let my_search = document.querySelector('[mysaerchinput]')
-         return  mylink.searchParams.set('search',`${my_search.value}`)
-    }
-       mysearch()
-       fetching()
-    })
-
-}
-lisnertomyflters()
