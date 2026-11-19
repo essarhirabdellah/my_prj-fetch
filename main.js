@@ -1,5 +1,5 @@
 import { printingelmnents, navbarstyling, verfiction, verfictionoptions, errorPage} from './ui.js'
-import { fetching, myfilter, mysearch,adding,gitcarddata,editing } from './servescard.js'
+import { fetching, myfilter, mysearch,adding,gitcarddata,editing,delet_card,update_stute_of_card } from './servescard.js'
 navbarstyling()
 fetching(printingelmnents, errorPage)
 let agian = document.querySelector('[ag-ian]')
@@ -97,7 +97,8 @@ document.addEventListener('click',async (ev)=>{
     }
 })
 let save_changes = document.querySelector('[savechange]')
-save_changes.addEventListener('click',()=>{
+save_changes.addEventListener('click',function (){
+    this.dib    ²
     let mynewupd = document.querySelector('.newformforupdate')
     let formdata = new FormData(mynewupd)
     let myupobj =  Object.fromEntries(formdata);
@@ -107,3 +108,81 @@ save_changes.addEventListener('click',()=>{
     fetching(printingelmnents, errorPage)
     
 })
+
+// ========================================================================
+document.addEventListener('click', async (ev)=>{
+    if (ev.target.hasAttribute('delet-methode')){
+       await delet_card(ev.target.dataset.id)
+       fetching(printingelmnents, errorPage)
+    } 
+})
+// =========================================================================
+const mytodocardslist = document.querySelector('[todo]')
+const myongoingcardslist = document.querySelector('[ongoing]')
+const mydonecardslist = document.querySelector('[done]')
+// let all_chibs = document.querySelectorAll('.count')
+new Sortable(mytodocardslist, {
+    group: 'shared', 
+    animation: 150,
+       onEnd: function (evt) {
+        // console.log(evt.item.dataset.id)
+        // console.log(evt.to.value)
+        update_stute_of_card(evt.item.dataset.id,evt.to.dataset.status)
+        let prvdiv = evt.from.previousElementSibling
+        let countnow = prvdiv.querySelector('.count')
+        let countnownum = Number(countnow.textContent)
+        // console.log(countnownum)
+        countnow.textContent = --countnownum
+        let newdiv = evt.to.previousElementSibling
+        let countftr =  newdiv.querySelector('.count')
+        let countftrnum = Number(countftr.textContent)
+        // console.log(countftrnum)
+        countftr.textContent = ++countftrnum
+        
+    } 
+        
+   
+});
+
+new Sortable(myongoingcardslist, {
+    group: 'shared',
+    animation: 150,
+       onEnd: function (evt) {
+        // console.log(evt.item.dataset.id)
+        // console.log(evt.to.dataset.status)
+        update_stute_of_card(evt.item.dataset.id,evt.to.dataset.status)
+        let prvdiv = evt.from.previousElementSibling
+        let countnow = prvdiv.querySelector('.count')
+        let countnownum = Number(countnow.textContent)
+        // console.log(countnownum)
+        countnow.textContent = --countnownum
+        let newdiv = evt.to.previousElementSibling
+        let countftr =  newdiv.querySelector('.count')
+        let countftrnum = Number(countftr.textContent)
+        // console.log(countftrnum)
+        countftr.textContent = ++countftrnum
+        
+    } 
+});
+new Sortable(mydonecardslist, {
+    group: 'shared', 
+    animation: 150,
+     onEnd: function (evt) {
+        // console.log(evt.item.dataset.id)
+        // console.log(evt.to.dataset.status)
+        update_stute_of_card(evt.item.dataset.id,evt.to.dataset.status)
+        let prvdiv = evt.from.previousElementSibling
+        let countnow = prvdiv.querySelector('.count')
+        let countnownum = Number(countnow.textContent)
+        // console.log(countnownum)
+        countnow.textContent = --countnownum
+        let newdiv = evt.to.previousElementSibling
+        let countftr =  newdiv.querySelector('.count')
+        let countftrnum = Number(countftr.textContent)
+        // console.log(countftrnum)
+        countftr.textContent = ++countftrnum
+        
+    } 
+});
+
+//=====================================================================

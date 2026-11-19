@@ -87,6 +87,49 @@ try {
 }
 }
 // ===========================================================================
+export async function delet_card(id) {
+  
+
+const options = {
+  method: 'DELETE',
+  url: 'https://flowboard-api-virid.vercel.app/cards/'+id+'?password=1234',
+  headers: {
+    'X-Workspace': 'public'
+  }
+}
+
+try {
+  const { data } = await axios.request(options)
+  console.log(data)
+} catch (error) {
+  console.log(error)
+}
+}
+// ======================================================================
+export async function update_stute_of_card(id,status) {
+  
+
+
+const options = {
+  method: 'PATCH',
+  url: 'https://flowboard-api-virid.vercel.app/cards/'+id+"?password=1234",
+  headers: {
+    'X-Workspace': 'public',
+    'Content-Type': 'application/json'
+  },
+  data: {
+    status:  status
+  }
+}
+
+try {
+  const { data } = await axios.request(options)
+  console.log(data)
+} catch (error) {
+  console.error(error)
+}
+}
+// ======================================================================
 export function myfilter() {
     let nameflt = document.querySelector('[namefilter]')
     let proretyflt = document.querySelector('[priorityfilter]')
