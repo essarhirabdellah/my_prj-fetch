@@ -1,7 +1,11 @@
+import {key} from './apikey.js'
+// console.log(key)
 // import  from "./axios";
 // export let mydata = null
 // export let mylink = new URL('https://flowboard-api-virid.vercel.app/cards')
 let search = {}
+// localStorage.setItem('searsh',search)
+// let objstorgefilter = localStorage.getItem('searsh')
 export async function fetching(print,er){
 
   try{
@@ -9,8 +13,9 @@ export async function fetching(print,er){
     headers: {
     'X-Workspace': 'public'
   },
-  params: search
+  params: JSON.parse(localStorage.getItem('searsh')) ?? '' //localitem ?? "", 
 })
+//  console.log(objstorge)
    print(reply.data)
 //    console.log(mydata)
    console.log('hi safe')
@@ -87,6 +92,49 @@ try {
 }
 }
 // ===========================================================================
+export async function delet_card(id) {
+  
+
+const options = {
+  method: 'DELETE',
+  url: 'https://flowboard-api-virid.vercel.app/cards/'+id+'?password=1234',
+  headers: {
+    'X-Workspace': 'public'
+  }
+}
+
+try {
+  const { data } = await axios.request(options)
+  console.log(data)
+} catch (error) {
+  console.log(error)
+}
+}
+// ======================================================================
+export async function update_stute_of_card(id,status) {
+  
+
+
+const options = {
+  method: 'PATCH',
+  url: 'https://flowboard-api-virid.vercel.app/cards/'+id+"?password=1234",
+  headers: {
+    'X-Workspace': 'public',
+    'Content-Type': 'application/json'
+  },
+  data: {
+    status: status
+  }
+}
+
+try {
+  const { data } = await axios.request(options)
+  console.log(data)
+} catch (error) {
+  console.error(error)
+}
+}
+// ======================================================================
 export function myfilter() {
     let nameflt = document.querySelector('[namefilter]')
     let proretyflt = document.querySelector('[priorityfilter]')
@@ -112,6 +160,11 @@ export function myfilter() {
             delete search.priority
             break;
     }
+    // localStorage.setItem('searsh',search)
+    localStorage.setItem('searsh',JSON.stringify(search))
+    localStorage.getItem('searsh')
+    // console.log(objstorgefilter)
+    console.log(typeof(localStorage.getItem('searsh')))
    
        
 }
@@ -127,4 +180,28 @@ export function myfilter() {
         //     search.search = ""
         //  }
     }
+// ===============================================================
+export async function creat_by_ai(discreption_of_tasks,task_number) {
+  
 
+const options = {
+  method: 'POST',
+  url: 'https://flowboard-api-virid.vercel.app/ai/cards?password=1234',
+  headers: {
+    'X-Workspace': 'public',
+    'Content-Type': 'application/json'
+  },
+  data: {
+    description: discreption_of_tasks,
+    apiKey: key,
+    count: task_number
+  }
+}
+
+try {
+  const { data } = await axios.request(options)
+  console.log(data)
+} catch (error) {
+  console.error(error)
+}
+}
